@@ -29,10 +29,24 @@ log.txt
 /out-tsc
 /bazel-out
 
-# Node
+# Node / package manager
 /node_modules
 npm-debug.log
 yarn-error.log
+.pnpm-store/
+.npm/
+
+# Local build / runtime artifacts
+/.angular/
+/.capacitor/
+/www
+/android
+/ios
+/coverage
+/.nx/
+/.sass-cache/
+/history/
+.vscode/
 
 # IDEs and editors
 .idea/
