@@ -1,0 +1,7 @@
+{
+  "name": "front-es2",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
