@@ -1,13 +1,87 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>cadastro</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding">
+  <h1>Criar conta</h1>
+  <p>Preencha seus dados para acessar o CardioTrack.</p>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">cadastro</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-item>
+    <ion-label position="stacked">Nome</ion-label>
+    <ion-input [(ngModel)]="usuario.nome"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Sobrenome</ion-label>
+    <ion-input [(ngModel)]="usuario.sobrenome"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">E-mail</ion-label>
+    <ion-input type="email" [(ngModel)]="usuario.email"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Telefone</ion-label>
+    <ion-input [(ngModel)]="usuario.telefone"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Senha</ion-label>
+    <ion-input
+      [type]="mostrarSenha ? 'text' : 'password'"
+      [(ngModel)]="usuario.senha"
+    ></ion-input>
+    <ion-button fill="clear" slot="end" (click)="mostrarSenha = !mostrarSenha">
+      {{ mostrarSenha ? 'Ocultar' : 'Mostrar' }}
+    </ion-button>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Confirmar senha</ion-label>
+    <ion-input
+      [type]="mostrarConfirmacaoSenha ? 'text' : 'password'"
+      [(ngModel)]="usuario.confirmacaoSenha"
+    ></ion-input>
+    <ion-button
+      fill="clear"
+      slot="end"
+      (click)="mostrarConfirmacaoSenha = !mostrarConfirmacaoSenha"
+    >
+      {{ mostrarConfirmacaoSenha ? 'Ocultar' : 'Mostrar' }}
+    </ion-button>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Data de nascimento</ion-label>
+    <ion-input type="date" [(ngModel)]="usuario.dataNascimento"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Sexo</ion-label>
+    <ion-select [(ngModel)]="usuario.sexo">
+      @for (sexo of sexos; track sexo.valor) {
+      <ion-select-option [value]="sexo.valor">
+        {{ sexo.label }}
+      </ion-select-option>
+      }
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>País de residência</ion-label>
+    <ion-select [(ngModel)]="usuario.paisResidencia">
+      @for (pais of paises; track pais) {
+      <ion-select-option [value]="pais"> {{ pais }} </ion-select-option>
+      }
+    </ion-select>
+  </ion-item>
+
+  <ion-button expand="block" (click)="cadastrar()"> Cadastrar </ion-button>
+
+  <ion-button expand="block" fill="clear" routerLink="/login">
+    Já tenho conta
+  </ion-button>
+
+  @if (mensagemErro) {
+  <ion-text color="danger">
+    <p>{{ mensagemErro }}</p>
+  </ion-text>
+  }
 </ion-content>

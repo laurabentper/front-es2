@@ -1,20 +1,59 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import {
+  IonButton,
+  IonContent,
+  IonInput,
+  IonItem,
+  IonLabel,
+  IonText,
+} from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [
+    FormsModule,
+    RouterLink,
+    IonContent,
+    IonItem,
+    IonLabel,
+    IonInput,
+    IonButton,
+    IonText,
+  ],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
+  email = '';
+  senha = '';
+  mensagemErro = '';
 
-  constructor() { }
+  constructor(
+    private readonly usuarioService: UsuarioService,
+    private readonly router: Router
+  ) {}
 
-  ngOnInit() {
+  entrar(): void {
+    this.mensagemErro = '';
+
+    this.usuarioService.login({
+      email: this.email,
+      senha: this.senha,
+    }).subscribe({
+      next: (resposta) => {
+        if (resposta.token) {
+          this.usuarioService.salvarToken(resposta.token);
+          this.router.navigate(['/dashboard']);
+        }
+      },
+      error: () => {
+        this.mensagemErro = 'E-mail ou senha inválidos.';
+      },
+    });
   }
-
 }
