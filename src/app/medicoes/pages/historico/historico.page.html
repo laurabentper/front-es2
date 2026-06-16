@@ -1,44 +1,87 @@
 <ion-content class="ion-padding">
-  <h1>Histórico de Medições</h1>
+  <section class="page-header">
+    <h1>Histórico</h1>
+    <p>Acompanhe suas medições cardíacas registradas.</p>
+  </section>
 
-  <ion-button expand="block" routerLink="/medicao-form">
-    Nova Medição
-  </ion-button>
-  <ion-button expand="block" fill="clear" routerLink="/dashboard">
-    Voltar ao Dashboard
-  </ion-button>
+  <section class="actions">
+    <ion-button expand="block" routerLink="/medicao-form">
+      Nova Medição
+    </ion-button>
+
+    <ion-button expand="block" fill="outline" routerLink="/dashboard">
+      Voltar ao Dashboard
+    </ion-button>
+  </section>
 
   @if (mensagemErro) {
-  <ion-text color="danger">
-    <p>{{ mensagemErro }}</p>
-  </ion-text>
-  } @if (medicoes.length === 0 && !mensagemErro) {
-  <p>Nenhuma medição registrada ainda.</p>
-  } @for (medicao of medicoes; track medicao.id) {
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>
-        {{ medicao.registradaEm | date: 'dd/MM/yyyy HH:mm' }}
-      </ion-card-title>
-    </ion-card-header>
+    <ion-text color="danger">
+      <p>{{ mensagemErro }}</p>
+    </ion-text>
+  }
 
-    <ion-card-content>
-      <p>
-        <strong>Pressão:</strong> {{ medicao.pressaoSistolica }}/{{
-        medicao.pressaoDiastolica }} mmHg
-      </p>
-      <p>
-        <strong>Frequência cardíaca:</strong> {{ medicao.frequenciaCardiaca }}
-        bpm
-      </p>
-      <p><strong>Oxigenação:</strong> {{ medicao.oxigenacaoSangue }}%</p>
-      <p><strong>Peso:</strong> {{ medicao.pesoCorporal }} kg</p>
+  @if (medicoes.length === 0 && !mensagemErro) {
+    <ion-card>
+      <ion-card-content>
+        <p>Nenhuma medição registrada ainda.</p>
+        <ion-button expand="block" routerLink="/medicao-form">
+          Registrar primeira medição
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  }
 
-      <p>
-        <strong>Sintomas:</strong>
-        @if (medicao.possuiSintomas) { Sim } @else { Não }
-      </p>
-    </ion-card-content>
-  </ion-card>
+  @for (medicao of medicoes; track medicao.id) {
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          {{ medicao.registradaEm | date: 'dd/MM/yyyy HH:mm' }}
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="measurement-grid">
+          <p>
+            <strong>Pressão</strong>
+            <span>{{ medicao.pressaoSistolica }}/{{ medicao.pressaoDiastolica }} mmHg</span>
+          </p>
+
+          <p>
+            <strong>Frequência</strong>
+            <span>{{ medicao.frequenciaCardiaca }} bpm</span>
+          </p>
+
+          <p>
+            <strong>Oxigenação</strong>
+            <span>{{ medicao.oxigenacaoSangue }}%</span>
+          </p>
+
+          <p>
+            <strong>Peso</strong>
+            <span>{{ medicao.pesoCorporal }} kg</span>
+          </p>
+        </div>
+
+        <p class="symptoms">
+          <strong>Sintomas:</strong>
+          @if (medicao.possuiSintomas) {
+            Sim
+          } @else {
+            Não
+          }
+        </p>
+
+        @if (medicao.possuiSintomas) {
+          <div class="symptoms-details">
+            <strong>Qual sintoma?</strong>
+            <div class="symptom-tags">
+              @for (sintoma of obterSintomasMarcados(medicao.sintomas); track sintoma) {
+                <span>{{ sintoma }}</span>
+              }
+            </div>
+          </div>
+        }
+      </ion-card-content>
+    </ion-card>
   }
 </ion-content>

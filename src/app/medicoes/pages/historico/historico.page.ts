@@ -13,6 +13,7 @@ import { RouterLink } from '@angular/router';
 
 import { RelatorioService } from '../../../relatorios/services/relatorio.service';
 import { MedicaoResposta } from '../../models/medicao-resposta.model';
+import { SintomasResposta } from '../../models/sintomas-resposta.model';
 
 @Component({
   selector: 'app-historico',
@@ -34,6 +35,11 @@ import { MedicaoResposta } from '../../models/medicao-resposta.model';
 export class HistoricoPage implements OnInit {
   medicoes: MedicaoResposta[] = [];
   mensagemErro = '';
+  private readonly sintomasLabels: Record<keyof SintomasResposta, string> = {
+    faltaDeAr: 'Falta de ar',
+    dorNoPeito: 'Dor no peito',
+    tontura: 'Tontura',
+  };
 
   constructor(private readonly relatorioService: RelatorioService) {}
 
@@ -52,5 +58,15 @@ export class HistoricoPage implements OnInit {
         this.mensagemErro = 'Não foi possível carregar o histórico.';
       },
     });
+  }
+
+  obterSintomasMarcados(sintomas: SintomasResposta | null | undefined): string[] {
+    if (!sintomas) {
+      return [];
+    }
+
+    return (Object.keys(this.sintomasLabels) as (keyof SintomasResposta)[])
+      .filter((chave) => sintomas[chave])
+      .map((chave) => this.sintomasLabels[chave]);
   }
 }

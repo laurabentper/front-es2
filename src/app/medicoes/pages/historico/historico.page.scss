@@ -1,0 +1,68 @@
+.page-header {
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  margin-bottom: 4px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.page-header p {
+  margin: 0;
+  color: var(--ion-color-medium);
+}
+
+.actions {
+  margin-bottom: 16px;
+}
+
+.measurement-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.measurement-grid p {
+  margin: 0;
+}
+
+.measurement-grid strong,
+.measurement-grid span {
+  display: block;
+}
+
+.measurement-grid span {
+  margin-top: 4px;
+}
+
+.symptoms {
+  margin-top: 16px;
+}
+
+.symptoms-details {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(var(--ion-color-danger-rgb), 0.08);
+}
+
+.symptoms-details strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.symptom-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.symptom-tags span {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--ion-color-danger);
+  color: var(--ion-color-danger-contrast);
+  font-size: 14px;
+  font-weight: 600;
+}
