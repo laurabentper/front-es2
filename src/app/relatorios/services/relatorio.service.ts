@@ -1,10 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { ResumoMedicoesResposta } from '../models/resumo-medicoes-resposta.model';
 import { environment } from '../../../environments/environment';
-import { UsuarioService } from '../../usuarios/services/usuario.service';
 import { HistoricoMedicoesResposta } from '../models/historico-medicoes-resposta.model';
 
 @Injectable({
@@ -13,28 +12,13 @@ import { HistoricoMedicoesResposta } from '../models/historico-medicoes-resposta
 export class RelatorioService {
   private readonly apiUrl = `${environment.apiUrl}/relatorios`;
 
-  constructor(
-    private readonly http: HttpClient,
-    private readonly usuarioService: UsuarioService
-  ) { }
+  constructor(private readonly http: HttpClient) {}
 
   obterHistorico(): Observable<HistoricoMedicoesResposta> {
-    return this.http.get<HistoricoMedicoesResposta>(`${this.apiUrl}/historico`, {
-      headers: this.obterHeadersAutenticados(),
-    });
+    return this.http.get<HistoricoMedicoesResposta>(`${this.apiUrl}/historico`);
   }
 
   obterResumo(): Observable<ResumoMedicoesResposta> {
-    return this.http.get<ResumoMedicoesResposta>(`${this.apiUrl}/resumo`, {
-      headers: this.obterHeadersAutenticados(),
-    });
-  }
-
-  private obterHeadersAutenticados(): HttpHeaders {
-    const token = this.usuarioService.obterToken();
-
-    return new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
+    return this.http.get<ResumoMedicoesResposta>(`${this.apiUrl}/resumo`);
   }
 }
