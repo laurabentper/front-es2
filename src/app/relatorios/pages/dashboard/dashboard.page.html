@@ -1,115 +1,120 @@
 <ion-content class="ion-padding">
-  <h1>Dashboard</h1>
+  <section class="dashboard-header">
+    <h1>CardioTrack</h1>
+    <p>Resumo da sua saúde cardíaca</p>
+  </section>
 
-  <ion-button expand="block" routerLink="/medicao-form">
-    Nova Medição
-  </ion-button>
+  <section class="actions">
+    <ion-button expand="block" routerLink="/medicao-form">
+      Nova Medição
+    </ion-button>
 
-  <ion-button expand="block" fill="clear" routerLink="/historico">
-    Ver Histórico
-  </ion-button>
+    <ion-button expand="block" fill="outline" routerLink="/historico">
+      Ver Histórico
+    </ion-button>
+  </section>
 
   @if (mensagemErro) {
-  <ion-text color="danger">
-    <p>{{ mensagemErro }}</p>
-  </ion-text>
-  } @if (resumo) {
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Resumo Geral</ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      <p><strong>Total de medições:</strong> {{ resumo.totalMedicoes }}</p>
-
-      @if (resumo.primeiraMedicaoEm) {
-      <p>
-        <strong>Primeira medição:</strong> {{ resumo.primeiraMedicaoEm | date:
-        'dd/MM/yyyy HH:mm' }}
-      </p>
-      } @if (resumo.ultimaMedicaoEm) {
-      <p>
-        <strong>Última medição:</strong> {{ resumo.ultimaMedicaoEm | date:
-        'dd/MM/yyyy HH:mm' }}
-      </p>
-      }
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Pressão Sistólica</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <p>Média: {{ resumo.pressaoSistolica.media | number: '1.0-1' }}</p>
-      <p>Mínima: {{ resumo.pressaoSistolica.minimo }}</p>
-      <p>Máxima: {{ resumo.pressaoSistolica.maximo }}</p>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Pressão Diastólica</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <p>Média: {{ resumo.pressaoDiastolica.media | number: '1.0-1' }}</p>
-      <p>Mínima: {{ resumo.pressaoDiastolica.minimo }}</p>
-      <p>Máxima: {{ resumo.pressaoDiastolica.maximo }}</p>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Frequência Cardíaca</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <p>Média: {{ resumo.frequenciaCardiaca.media | number: '1.0-1' }}</p>
-      <p>Mínima: {{ resumo.frequenciaCardiaca.minimo }}</p>
-      <p>Máxima: {{ resumo.frequenciaCardiaca.maximo }}</p>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Oxigenação do Sangue</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <p>Média: {{ resumo.oxigenacaoSangue.media | number: '1.0-1' }}%</p>
-      <p>Mínima: {{ resumo.oxigenacaoSangue.minimo }}%</p>
-      <p>Máxima: {{ resumo.oxigenacaoSangue.maximo }}%</p>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Peso Corporal</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <p>Média: {{ resumo.pesoCorporal.media | number: '1.0-1' }} kg</p>
-      <p>Mínimo: {{ resumo.pesoCorporal.minimo }} kg</p>
-      <p>Máximo: {{ resumo.pesoCorporal.maximo }} kg</p>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Sintomas</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <p>Falta de ar: {{ resumo.sintomas.faltaDeAr }}</p>
-      <p>Dor no peito: {{ resumo.sintomas.dorNoPeito }}</p>
-      <p>Tontura: {{ resumo.sintomas.tontura }}</p>
-      <p>Com algum sintoma: {{ resumo.sintomas.comAlgumSintoma }}</p>
-      <p>Sem sintomas: {{ resumo.sintomas.semSintomas }}</p>
-    </ion-card-content>
-  </ion-card>
-  } @else if (!mensagemErro) {
-  <p>Nenhum resumo disponível.</p>
+    <ion-text color="danger">
+      <p>{{ mensagemErro }}</p>
+    </ion-text>
   }
-  <ion-button expand="block" fill="clear" routerLink="/integrantes">
-    Sobre o Projeto
-  </ion-button>
-  <ion-button expand="block" color="medium" fill="outline" (click)="sair()">
-    Sair
-  </ion-button>
+
+  @if (resumo) {
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Resumo Geral</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p><strong>Total:</strong> {{ resumo.totalMedicoes }} medições</p>
+
+        @if (resumo.primeiraMedicaoEm) {
+          <p><strong>Primeira:</strong> {{ resumo.primeiraMedicaoEm | date: 'dd/MM/yyyy HH:mm' }}</p>
+        }
+
+        @if (resumo.ultimaMedicaoEm) {
+          <p><strong>Última:</strong> {{ resumo.ultimaMedicaoEm | date: 'dd/MM/yyyy HH:mm' }}</p>
+        }
+      </ion-card-content>
+    </ion-card>
+
+    <section class="metric-grid">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Pressão Sistólica</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p class="metric-value">{{ resumo.pressaoSistolica.media | number: '1.0-1' }}</p>
+          <p>Min: {{ resumo.pressaoSistolica.minimo }} | Max: {{ resumo.pressaoSistolica.maximo }}</p>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Pressão Diastólica</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p class="metric-value">{{ resumo.pressaoDiastolica.media | number: '1.0-1' }}</p>
+          <p>Min: {{ resumo.pressaoDiastolica.minimo }} | Max: {{ resumo.pressaoDiastolica.maximo }}</p>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Frequência Cardíaca</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p class="metric-value">{{ resumo.frequenciaCardiaca.media | number: '1.0-1' }} bpm</p>
+          <p>Min: {{ resumo.frequenciaCardiaca.minimo }} | Max: {{ resumo.frequenciaCardiaca.maximo }}</p>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Oxigenação</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p class="metric-value">{{ resumo.oxigenacaoSangue.media | number: '1.0-1' }}%</p>
+          <p>Min: {{ resumo.oxigenacaoSangue.minimo }}% | Max: {{ resumo.oxigenacaoSangue.maximo }}%</p>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Peso Corporal</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p class="metric-value">{{ resumo.pesoCorporal.media | number: '1.0-1' }} kg</p>
+          <p>Min: {{ resumo.pesoCorporal.minimo }} kg | Max: {{ resumo.pesoCorporal.maximo }} kg</p>
+        </ion-card-content>
+      </ion-card>
+    </section>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Sintomas</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p>Falta de ar: {{ resumo.sintomas.faltaDeAr }}</p>
+        <p>Dor no peito: {{ resumo.sintomas.dorNoPeito }}</p>
+        <p>Tontura: {{ resumo.sintomas.tontura }}</p>
+        <p>Com algum sintoma: {{ resumo.sintomas.comAlgumSintoma }}</p>
+        <p>Sem sintomas: {{ resumo.sintomas.semSintomas }}</p>
+      </ion-card-content>
+    </ion-card>
+  } @else if (!mensagemErro) {
+    <p>Nenhum resumo disponível.</p>
+  }
+
+  <section class="secondary-actions">
+    <ion-button expand="block" fill="clear" routerLink="/integrantes">
+      Sobre o Projeto
+    </ion-button>
+
+    <ion-button expand="block" color="medium" fill="outline" (click)="sair()">
+      Sair
+    </ion-button>
+  </section>
 </ion-content>
