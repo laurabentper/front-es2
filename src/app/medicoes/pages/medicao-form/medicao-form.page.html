@@ -3,79 +3,59 @@
 
   <ion-item>
     <ion-label position="stacked">Pressão Sistólica</ion-label>
-    <ion-input
-      type="number"
-      [(ngModel)]="medicao.pressaoSistolica">
+    <ion-input type="number" [(ngModel)]="medicao.pressaoSistolica">
     </ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="stacked">Pressão Diastólica</ion-label>
-    <ion-input
-      type="number"
-      [(ngModel)]="medicao.pressaoDiastolica">
+    <ion-input type="number" [(ngModel)]="medicao.pressaoDiastolica">
     </ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="stacked">Frequência Cardíaca</ion-label>
-    <ion-input
-      type="number"
-      [(ngModel)]="medicao.frequenciaCardiaca">
+    <ion-input type="number" [(ngModel)]="medicao.frequenciaCardiaca">
     </ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="stacked">Oxigenação do Sangue (%)</ion-label>
-    <ion-input
-      type="number"
-      [(ngModel)]="medicao.oxigenacaoSangue">
+    <ion-input type="number" [(ngModel)]="medicao.oxigenacaoSangue">
     </ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="stacked">Peso Corporal (kg)</ion-label>
-    <ion-input
-      type="number"
-      [(ngModel)]="medicao.pesoCorporal">
-    </ion-input>
+    <ion-input type="number" [(ngModel)]="medicao.pesoCorporal"> </ion-input>
   </ion-item>
 
   <h2>Sintomas</h2>
 
   <ion-item>
-    <ion-checkbox
-      slot="start"
-      [(ngModel)]="medicao.faltaDeAr">
-    </ion-checkbox>
+    <ion-checkbox slot="start" [(ngModel)]="medicao.faltaDeAr"> </ion-checkbox>
     <ion-label>Falta de ar</ion-label>
   </ion-item>
 
   <ion-item>
-    <ion-checkbox
-      slot="start"
-      [(ngModel)]="medicao.dorNoPeito">
-    </ion-checkbox>
+    <ion-checkbox slot="start" [(ngModel)]="medicao.dorNoPeito"> </ion-checkbox>
     <ion-label>Dor no peito</ion-label>
   </ion-item>
 
   <ion-item>
-    <ion-checkbox
-      slot="start"
-      [(ngModel)]="medicao.tontura">
-    </ion-checkbox>
+    <ion-checkbox slot="start" [(ngModel)]="medicao.tontura"> </ion-checkbox>
     <ion-label>Tontura</ion-label>
   </ion-item>
 
-  <ion-button
-    expand="block"
-    (click)="registrar()">
-    Salvar Medição
-  </ion-button>
+  <ion-button expand="block" (click)="registrar()"> Salvar Medição </ion-button>
 
+  <ion-button expand="block" fill="clear" routerLink="/dashboard">
+    Voltar ao Dashboard
+  </ion-button>
+  
   @if (mensagemErro) {
-    <ion-text color="danger">
-      <p>{{ mensagemErro }}</p>
-    </ion-text>
+  <ion-text color="danger">
+    <p>{{ mensagemErro }}</p>
+  </ion-text>
   }
 </ion-content>

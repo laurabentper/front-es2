@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
+  IonButton,
   IonCard,
   IonCardContent,
   IonCardHeader,
@@ -13,7 +15,9 @@ import {
   styleUrls: ['./integrantes.page.scss'],
   standalone: true,
   imports: [
+    RouterLink,
     IonContent,
+    IonButton,
     IonCard,
     IonCardHeader,
     IonCardTitle,

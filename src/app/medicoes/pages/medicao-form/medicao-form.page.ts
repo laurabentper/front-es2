@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import {
   IonButton,
   IonCheckbox,
@@ -21,6 +21,7 @@ import { RegistrarMedicaoRequisicao } from '../../models/registrar-medicao-requi
   standalone: true,
   imports: [
     FormsModule,
+    RouterLink,
     IonContent,
     IonItem,
     IonLabel,

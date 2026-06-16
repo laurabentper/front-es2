@@ -4,40 +4,41 @@
   <ion-button expand="block" routerLink="/medicao-form">
     Nova Medição
   </ion-button>
+  <ion-button expand="block" fill="clear" routerLink="/dashboard">
+    Voltar ao Dashboard
+  </ion-button>
 
   @if (mensagemErro) {
-    <ion-text color="danger">
-      <p>{{ mensagemErro }}</p>
-    </ion-text>
-  }
+  <ion-text color="danger">
+    <p>{{ mensagemErro }}</p>
+  </ion-text>
+  } @if (medicoes.length === 0 && !mensagemErro) {
+  <p>Nenhuma medição registrada ainda.</p>
+  } @for (medicao of medicoes; track medicao.id) {
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        {{ medicao.registradaEm | date: 'dd/MM/yyyy HH:mm' }}
+      </ion-card-title>
+    </ion-card-header>
 
-  @if (medicoes.length === 0 && !mensagemErro) {
-    <p>Nenhuma medição registrada ainda.</p>
-  }
+    <ion-card-content>
+      <p>
+        <strong>Pressão:</strong> {{ medicao.pressaoSistolica }}/{{
+        medicao.pressaoDiastolica }} mmHg
+      </p>
+      <p>
+        <strong>Frequência cardíaca:</strong> {{ medicao.frequenciaCardiaca }}
+        bpm
+      </p>
+      <p><strong>Oxigenação:</strong> {{ medicao.oxigenacaoSangue }}%</p>
+      <p><strong>Peso:</strong> {{ medicao.pesoCorporal }} kg</p>
 
-  @for (medicao of medicoes; track medicao.id) {
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>
-          {{ medicao.registradaEm | date: 'dd/MM/yyyy HH:mm' }}
-        </ion-card-title>
-      </ion-card-header>
-
-      <ion-card-content>
-        <p><strong>Pressão:</strong> {{ medicao.pressaoSistolica }}/{{ medicao.pressaoDiastolica }} mmHg</p>
-        <p><strong>Frequência cardíaca:</strong> {{ medicao.frequenciaCardiaca }} bpm</p>
-        <p><strong>Oxigenação:</strong> {{ medicao.oxigenacaoSangue }}%</p>
-        <p><strong>Peso:</strong> {{ medicao.pesoCorporal }} kg</p>
-
-        <p>
-          <strong>Sintomas:</strong>
-          @if (medicao.possuiSintomas) {
-            Sim
-          } @else {
-            Não
-          }
-        </p>
-      </ion-card-content>
-    </ion-card>
+      <p>
+        <strong>Sintomas:</strong>
+        @if (medicao.possuiSintomas) { Sim } @else { Não }
+      </p>
+    </ion-card-content>
+  </ion-card>
   }
 </ion-content>
