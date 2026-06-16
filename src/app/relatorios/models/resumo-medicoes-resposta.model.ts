@@ -5,10 +5,10 @@ export interface ResumoMedicoesResposta {
   totalMedicoes: number;
   primeiraMedicaoEm: string | null;
   ultimaMedicaoEm: string | null;
-  pressaoSistolicaEstatistica: EstatisticaResposta;
-  pressaoDiastolicaEstatistica: EstatisticaResposta;
-  frequenciaCardiacaEstatistica: EstatisticaResposta;
-  oxigenacaoSangueEstatistica: EstatisticaResposta;
-  pesoCorporalEstatistica: EstatisticaResposta;
+  pressaoSistolica: EstatisticaResposta;
+  pressaoDiastolica: EstatisticaResposta;
+  frequenciaCardiaca: EstatisticaResposta;
+  oxigenacaoSangue: EstatisticaResposta;
+  pesoCorporal: EstatisticaResposta;
   sintomas: FrequenciaSintomasResposta;
 }

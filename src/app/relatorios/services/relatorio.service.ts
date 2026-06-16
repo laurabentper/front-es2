@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { ResumoMedicoesResposta } from '../models/resumo-medicoes-resposta.model';
 import { environment } from '../../../environments/environment';
 import { UsuarioService } from '../../usuarios/services/usuario.service';
 import { HistoricoMedicoesResposta } from '../models/historico-medicoes-resposta.model';
@@ -15,10 +16,16 @@ export class RelatorioService {
   constructor(
     private readonly http: HttpClient,
     private readonly usuarioService: UsuarioService
-  ) {}
+  ) { }
 
   obterHistorico(): Observable<HistoricoMedicoesResposta> {
     return this.http.get<HistoricoMedicoesResposta>(`${this.apiUrl}/historico`, {
+      headers: this.obterHeadersAutenticados(),
+    });
+  }
+
+  obterResumo(): Observable<ResumoMedicoesResposta> {
+    return this.http.get<ResumoMedicoesResposta>(`${this.apiUrl}/resumo`, {
       headers: this.obterHeadersAutenticados(),
     });
   }
