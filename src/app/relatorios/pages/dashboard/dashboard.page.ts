@@ -1,5 +1,6 @@
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import {
   IonButton,
   IonCard,
@@ -9,9 +10,9 @@ import {
   IonContent,
   IonText,
 } from '@ionic/angular/standalone';
-import { RouterLink } from '@angular/router';
 
 import { RelatorioService } from '../../services/relatorio.service';
+import { UsuarioService } from '../../../usuarios/services/usuario.service';
 import { ResumoMedicoesResposta } from '../../models/resumo-medicoes-resposta.model';
 
 @Component({
@@ -36,7 +37,11 @@ export class DashboardPage implements OnInit {
   resumo: ResumoMedicoesResposta | null = null;
   mensagemErro = '';
 
-  constructor(private readonly relatorioService: RelatorioService) { }
+  constructor(
+    private readonly relatorioService: RelatorioService,
+    private readonly usuarioService: UsuarioService,
+    private readonly router: Router
+  ) { }
 
   ngOnInit(): void {
     this.carregarResumo();
@@ -54,5 +59,10 @@ export class DashboardPage implements OnInit {
         this.mensagemErro = 'Não foi possível carregar o resumo.';
       },
     });
+  }
+
+  sair(): void {
+    this.usuarioService.logout();
+    this.router.navigate(['/login']);
   }
 }
