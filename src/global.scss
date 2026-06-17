@@ -25,13 +25,265 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
+html,
+body {
+  background:
+    radial-gradient(circle at top left, rgba(173, 225, 214, 0.72), transparent 34%),
+    radial-gradient(circle at top right, rgba(186, 220, 242, 0.62), transparent 28%),
+    linear-gradient(180deg, var(--app-bg-top), var(--app-bg-bottom));
+  color: var(--app-text-strong);
+}
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+body {
+  font-family: var(--ion-font-family);
+}
+
+ion-app,
+ion-content {
+  --background: transparent;
+}
+
+ion-content::part(background) {
+  background: transparent;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ion-button {
+  --border-radius: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+ion-button[fill='outline'] {
+  --border-color: rgba(55, 122, 110, 0.18);
+  --color: var(--app-primary-strong);
+}
+
+ion-card,
+.surface-card {
+  border: 1px solid var(--app-border);
+  border-radius: 24px;
+  background: var(--app-surface-strong);
+  box-shadow: var(--app-shadow);
+  backdrop-filter: blur(14px);
+}
+
+ion-card {
+  margin: 0;
+}
+
+ion-card-title {
+  color: var(--app-text-strong);
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+ion-card-content,
+ion-item,
+ion-label,
+ion-input,
+ion-select,
+ion-text,
+p,
+span,
+strong {
+  color: inherit;
+}
+
+ion-item {
+  --background: var(--app-surface);
+  --border-color: transparent;
+  --border-radius: 18px;
+  --inner-border-width: 0;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --min-height: 62px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(74, 133, 124, 0.1);
+  border-radius: 18px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
+}
+
+ion-item::part(native) {
+  border-radius: 18px;
+}
+
+ion-label[position='stacked'] {
+  margin-bottom: 8px;
+  color: var(--app-text-muted);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+ion-input,
+ion-select {
+  --color: var(--app-text-strong);
+}
+
+.app-form-card,
+.app-panel,
+.app-empty-state {
+  padding: 20px;
+  border: 1px solid var(--app-border);
+  border-radius: 24px;
+  background: var(--app-surface-strong);
+  box-shadow: var(--app-shadow);
+  backdrop-filter: blur(14px);
+}
+
+.app-form-card h2,
+.app-panel h2,
+.app-empty-state h2,
+.app-section-title {
+  margin: 0 0 8px;
+  color: var(--app-text-strong);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.app-form-card p,
+.app-panel p,
+.app-empty-state p,
+.app-helper-text {
+  margin: 0;
+  color: var(--app-text-muted);
+  line-height: 1.6;
+}
+
+.app-form-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.app-actions {
+  display: grid;
+  gap: 12px;
+}
+
+.app-stats-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.app-inline-metrics {
+  display: grid;
+  gap: 12px;
+}
+
+.app-data-pair {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(76, 139, 127, 0.12);
+}
+
+.app-data-pair:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.app-data-pair strong {
+  color: var(--app-text-muted);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.app-data-pair span {
+  color: var(--app-text-strong);
+  font-weight: 700;
+  text-align: right;
+}
+
+.app-kpi-card {
+  padding: 18px;
+}
+
+.app-kpi-label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--app-text-muted);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.app-kpi-value {
+  margin: 0 0 8px;
+  color: var(--app-text-strong);
+  font-size: clamp(1.7rem, 4vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.app-kpi-meta {
+  margin: 0;
+  color: var(--app-text-soft);
+  font-size: 0.9rem;
+}
+
+.app-message {
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(235, 127, 142, 0.14);
+  color: #8c3441;
+  font-weight: 600;
+}
+
+.app-checkbox-list {
+  display: grid;
+  gap: 10px;
+}
+
+.app-checkbox-item {
+  --background: rgba(255, 255, 255, 0.76);
+  display: flex;
+  align-items: center;
+}
+
+.app-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.app-tags span {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(137, 181, 232, 0.16);
+  color: var(--app-primary-strong);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.app-grid-two {
+  display: grid;
+  gap: 14px;
+}
+
+@media (min-width: 720px) {
+  .app-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .app-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .app-inline-metrics,
+  .app-grid-two,
+  .app-form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1040px) {
+  .app-stats-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 import {
   IonButton,
-  IonButtons,
   IonHeader,
-  IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
 
@@ -16,10 +14,9 @@ import {
   standalone: true,
   imports: [
     RouterLink,
+    RouterLinkActive,
     IonHeader,
     IonToolbar,
-    IonTitle,
-    IonButtons,
     IonButton,
   ],
 })

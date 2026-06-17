@@ -1,61 +1,72 @@
-<ion-content class="ion-padding">
-  <h1>Registrar Medição</h1>
+<app-page-shell
+  title="Registrar nova medicao"
+  subtitle="Adicione seus indicadores de forma simples para manter o acompanhamento sempre atualizado."
+  eyebrow="Nova entrada"
+  [showHeader]="true"
+>
+  <section class="app-form-card measurement-form">
+    <h2>Indicadores principais</h2>
+    <p>Preencha os valores observados no momento da medicao.</p>
 
-  <ion-item>
-    <ion-label position="stacked">Pressão Sistólica</ion-label>
-    <ion-input type="number" [(ngModel)]="medicao.pressaoSistolica">
-    </ion-input>
-  </ion-item>
+    <div class="app-form-grid">
+      <ion-item>
+        <ion-label position="stacked">Pressao sistolica</ion-label>
+        <ion-input type="number" [(ngModel)]="medicao.pressaoSistolica"></ion-input>
+      </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Pressão Diastólica</ion-label>
-    <ion-input type="number" [(ngModel)]="medicao.pressaoDiastolica">
-    </ion-input>
-  </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Pressao diastolica</ion-label>
+        <ion-input type="number" [(ngModel)]="medicao.pressaoDiastolica"></ion-input>
+      </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Frequência Cardíaca</ion-label>
-    <ion-input type="number" [(ngModel)]="medicao.frequenciaCardiaca">
-    </ion-input>
-  </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Frequencia cardiaca</ion-label>
+        <ion-input type="number" [(ngModel)]="medicao.frequenciaCardiaca"></ion-input>
+      </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Oxigenação do Sangue (%)</ion-label>
-    <ion-input type="number" [(ngModel)]="medicao.oxigenacaoSangue">
-    </ion-input>
-  </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Oxigenacao do sangue (%)</ion-label>
+        <ion-input type="number" [(ngModel)]="medicao.oxigenacaoSangue"></ion-input>
+      </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Peso Corporal (kg)</ion-label>
-    <ion-input type="number" [(ngModel)]="medicao.pesoCorporal"> </ion-input>
-  </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Peso corporal (kg)</ion-label>
+        <ion-input type="number" [(ngModel)]="medicao.pesoCorporal"></ion-input>
+      </ion-item>
+    </div>
+  </section>
 
-  <h2>Sintomas</h2>
+  <section class="app-panel">
+    <h2>Sintomas</h2>
+    <p>Marque apenas o que estiver acontecendo agora.</p>
 
-  <ion-item>
-    <ion-checkbox slot="start" [(ngModel)]="medicao.faltaDeAr"> </ion-checkbox>
-    <ion-label>Falta de ar</ion-label>
-  </ion-item>
+    <div class="app-checkbox-list">
+      <ion-item class="app-checkbox-item">
+        <ion-checkbox slot="start" [(ngModel)]="medicao.faltaDeAr"></ion-checkbox>
+        <ion-label>Falta de ar</ion-label>
+      </ion-item>
 
-  <ion-item>
-    <ion-checkbox slot="start" [(ngModel)]="medicao.dorNoPeito"> </ion-checkbox>
-    <ion-label>Dor no peito</ion-label>
-  </ion-item>
+      <ion-item class="app-checkbox-item">
+        <ion-checkbox slot="start" [(ngModel)]="medicao.dorNoPeito"></ion-checkbox>
+        <ion-label>Dor no peito</ion-label>
+      </ion-item>
 
-  <ion-item>
-    <ion-checkbox slot="start" [(ngModel)]="medicao.tontura"> </ion-checkbox>
-    <ion-label>Tontura</ion-label>
-  </ion-item>
+      <ion-item class="app-checkbox-item">
+        <ion-checkbox slot="start" [(ngModel)]="medicao.tontura"></ion-checkbox>
+        <ion-label>Tontura</ion-label>
+      </ion-item>
+    </div>
+  </section>
 
-  <ion-button expand="block" (click)="registrar()"> Salvar Medição </ion-button>
-
-  <ion-button expand="block" fill="clear" routerLink="/dashboard">
-    Voltar ao Dashboard
-  </ion-button>
-  
   @if (mensagemErro) {
-  <ion-text color="danger">
-    <p>{{ mensagemErro }}</p>
-  </ion-text>
+    <ion-text class="app-message">
+      <p>{{ mensagemErro }}</p>
+    </ion-text>
   }
-</ion-content>
+
+  <section class="app-actions">
+    <ion-button expand="block" (click)="registrar()">
+      Salvar medicao
+    </ion-button>
+  </section>
+</app-page-shell>

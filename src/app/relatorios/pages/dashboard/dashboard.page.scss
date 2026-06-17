@@ -1,34 +1,20 @@
-.dashboard-header {
-  margin-bottom: 24px;
-}
-
-.dashboard-header h1 {
-  margin-bottom: 4px;
-  font-size: 28px;
-  font-weight: 700;
-}
-
-.dashboard-header p {
+.dashboard-symptoms-grid .app-data-pair {
   margin: 0;
-  color: var(--ion-color-medium);
 }
 
-.actions {
-  margin-bottom: 16px;
+.dashboard-footer-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
 }
 
-.metric-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
+.dashboard-footer-actions ion-button {
+  width: 100%;
+  max-width: 220px;
 }
 
-.metric-value {
-  font-size: 24px;
-  font-weight: 700;
-  margin: 0 0 8px;
-}
-
-.secondary-actions {
-  margin-top: 16px;
+@media (max-width: 719px) {
+  .dashboard-footer-actions ion-button {
+    max-width: none;
+  }
 }

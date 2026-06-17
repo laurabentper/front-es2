@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import {
-  IonButton,
   IonCard,
   IonCardContent,
   IonCardHeader,
   IonCardTitle,
-  IonContent,
 } from '@ionic/angular/standalone';
+
+import { PageShellComponent } from '../../../shared/components/page-shell/page-shell.component';
 
 @Component({
   selector: 'app-integrantes',
@@ -15,13 +14,11 @@ import {
   styleUrls: ['./integrantes.page.scss'],
   standalone: true,
   imports: [
-    RouterLink,
-    IonContent,
-    IonButton,
     IonCard,
     IonCardHeader,
     IonCardTitle,
     IonCardContent,
+    PageShellComponent,
   ],
 })
 export class IntegrantesPage {}

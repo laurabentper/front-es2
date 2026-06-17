@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://192.168.1.15:5189/api' /* Substituir pelo IP correto */
+  // ALTERAR PARA O IP DA MAQUINA ANTES DE GERAR O APK
+  apiUrl: 'http://SEU_IP_LOCAL:5189/api' 
 };

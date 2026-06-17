@@ -1,0 +1,10 @@
+.auth-card {
+  display: grid;
+  gap: 18px;
+}
+
+.auth-card__form,
+.auth-card__actions {
+  display: grid;
+  gap: 12px;
+}

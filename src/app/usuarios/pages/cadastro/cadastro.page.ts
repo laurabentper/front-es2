@@ -4,18 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import {
   IonButton,
-  IonContent,
   IonInput,
   IonItem,
   IonLabel,
   IonSelect,
   IonSelectOption,
-  IonText
+  IonText,
 } from '@ionic/angular/standalone';
 
 import { UsuarioService } from '../../services/usuario.service';
-import { Sexo } from '../../models/sexo.model';
 import { CadastrarUsuarioRequisicao } from '../../models/cadastrar-usuario-requisicao.model';
+import { PageShellComponent } from '../../../shared/components/page-shell/page-shell.component';
 
 @Component({
   selector: 'app-cadastro',
@@ -25,7 +24,6 @@ import { CadastrarUsuarioRequisicao } from '../../models/cadastrar-usuario-requi
   imports: [
     FormsModule,
     RouterLink,
-    IonContent,
     IonItem,
     IonLabel,
     IonInput,
@@ -33,6 +31,7 @@ import { CadastrarUsuarioRequisicao } from '../../models/cadastrar-usuario-requi
     IonSelect,
     IonSelectOption,
     IonText,
+    PageShellComponent,
   ],
 })
 export class CadastroPage {
@@ -56,18 +55,18 @@ export class CadastroPage {
     { valor: 'Masculino', label: 'Masculino' },
     { valor: 'Feminino', label: 'Feminino' },
     { valor: 'Outro', label: 'Outro' },
-    { valor: 'PrefiroNaoInformar', label: 'Prefiro não informar' },
+    { valor: 'PrefiroNaoInformar', label: 'Prefiro nao informar' },
   ];
 
   paises = [
     'Brasil',
     'Argentina',
     'Chile',
-    'Colômbia',
-    'México',
+    'Colombia',
+    'Mexico',
     'Portugal',
     'Estados Unidos',
-    'Canadá',
+    'Canada',
     'Espanha',
     'Outro',
   ];
@@ -75,7 +74,7 @@ export class CadastroPage {
   constructor(
     private readonly usuarioService: UsuarioService,
     private readonly router: Router
-  ) { }
+  ) {}
 
   cadastrar(): void {
     this.mensagemErro = '';
@@ -117,7 +116,6 @@ export class CadastroPage {
       return erro.error.title;
     }
 
-    return 'Não foi possível realizar o cadastro. Verifique os dados informados.';
+    return 'Nao foi possivel realizar o cadastro. Verifique os dados informados.';
   }
 }
-

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import {
   IonButton,
-  IonContent,
   IonInput,
   IonItem,
   IonLabel,
@@ -11,6 +10,7 @@ import {
 import { FormsModule } from '@angular/forms';
 
 import { UsuarioService } from '../../services/usuario.service';
+import { PageShellComponent } from '../../../shared/components/page-shell/page-shell.component';
 
 @Component({
   selector: 'app-login',
@@ -20,12 +20,12 @@ import { UsuarioService } from '../../services/usuario.service';
   imports: [
     FormsModule,
     RouterLink,
-    IonContent,
     IonItem,
     IonLabel,
     IonInput,
     IonButton,
     IonText,
+    PageShellComponent,
   ],
 })
 export class LoginPage {
@@ -52,7 +52,7 @@ export class LoginPage {
         }
       },
       error: () => {
-        this.mensagemErro = 'E-mail ou senha inválidos.';
+        this.mensagemErro = 'E-mail ou senha invalidos.';
       },
     });
   }

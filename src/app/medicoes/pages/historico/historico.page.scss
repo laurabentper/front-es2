@@ -1,68 +1,44 @@
-.page-header {
-  margin-bottom: 24px;
-}
-
-.page-header h1 {
-  margin-bottom: 4px;
-  font-size: 28px;
-  font-weight: 700;
-}
-
-.page-header p {
-  margin: 0;
-  color: var(--ion-color-medium);
-}
-
-.actions {
-  margin-bottom: 16px;
-}
-
-.measurement-grid {
+.history-list {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 16px;
 }
 
-.measurement-grid p {
-  margin: 0;
-}
-
-.measurement-grid strong,
-.measurement-grid span {
-  display: block;
-}
-
-.measurement-grid span {
-  margin-top: 4px;
-}
-
-.symptoms {
+.empty-state-action {
   margin-top: 16px;
 }
 
-.symptoms-details {
-  margin-top: 12px;
-  padding: 12px;
-  border-radius: 12px;
-  background: rgba(var(--ion-color-danger-rgb), 0.08);
+.history-metric,
+.history-symptoms {
+  display: grid;
+  gap: 6px;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(245, 251, 249, 0.96);
 }
 
-.symptoms-details strong {
-  display: block;
-  margin-bottom: 8px;
+.history-metric strong,
+.history-symptoms strong,
+.history-tag-box strong {
+  color: var(--app-text-muted);
+  font-size: 0.9rem;
 }
 
-.symptom-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+.history-metric span,
+.history-symptoms span {
+  color: var(--app-text-strong);
+  font-size: 1rem;
+  font-weight: 700;
 }
 
-.symptom-tags span {
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: var(--ion-color-danger);
-  color: var(--ion-color-danger-contrast);
-  font-size: 14px;
-  font-weight: 600;
+.history-symptoms {
+  margin-top: 14px;
+}
+
+.history-tag-box {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(137, 181, 232, 0.08);
 }

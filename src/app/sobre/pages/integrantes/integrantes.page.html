@@ -1,30 +1,33 @@
-<ion-content class="ion-padding">
-  <h1>CardioTrack</h1>
-  <p>Sistema de Acompanhamento de Saúde Cardíaca</p>
+<app-page-shell
+  title="Sobre o projeto"
+  subtitle="Uma interface simples para apoiar o acompanhamento cardiovascular com mais clareza no dia a dia."
+  eyebrow="CardioTrack"
+  [showHeader]="true"
+>
+  <section class="about-grid">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Integrantes</ion-card-title>
+      </ion-card-header>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Integrantes</ion-card-title>
-    </ion-card-header>
+      <ion-card-content>
+        <div class="about-list">
+          <p>Laura Benttenmuller Perlingeiro</p>
+          <p>Davi Lima de Moura</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
 
-    <ion-card-content>
-      <p>Laura Benttenmuller Perlingeiro</p>
-      <p>Davi Lima de Moura</p>
-    </ion-card-content>
-  </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Disciplina</ion-card-title>
+      </ion-card-header>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Disciplina</ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      <p>Engenharia de Software 2 - UNIRIO</p>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-button expand="block" routerLink="/dashboard">
-    Voltar ao Dashboard
-  </ion-button>
-  
-</ion-content>
+      <ion-card-content>
+        <div class="about-list">
+          <p>Engenharia de Software 2 - UNIRIO</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </section>
+</app-page-shell>

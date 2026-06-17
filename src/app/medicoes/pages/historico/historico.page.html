@@ -1,87 +1,82 @@
-<ion-content class="ion-padding">
-  <section class="page-header">
-    <h1>Histórico</h1>
-    <p>Acompanhe suas medições cardíacas registradas.</p>
-  </section>
-
-  <section class="actions">
+<app-page-shell
+  title="Historico de medicoes"
+  subtitle="Consulte seus registros anteriores e identifique mudancas importantes com rapidez."
+  eyebrow="Acompanhamento"
+  [showHeader]="true"
+>
+  <section shell-actions class="app-actions">
     <ion-button expand="block" routerLink="/medicao-form">
-      Nova Medição
-    </ion-button>
-
-    <ion-button expand="block" fill="outline" routerLink="/dashboard">
-      Voltar ao Dashboard
+      Nova medicao
     </ion-button>
   </section>
 
   @if (mensagemErro) {
-    <ion-text color="danger">
+    <ion-text class="app-message">
       <p>{{ mensagemErro }}</p>
     </ion-text>
   }
 
   @if (medicoes.length === 0 && !mensagemErro) {
-    <ion-card>
-      <ion-card-content>
-        <p>Nenhuma medição registrada ainda.</p>
+    <section class="app-empty-state">
+      <h2>Nenhuma medicao registrada</h2>
+      <p>Comece pelo primeiro registro para montar seu historico de acompanhamento.</p>
+      <div class="empty-state-action">
         <ion-button expand="block" routerLink="/medicao-form">
-          Registrar primeira medição
+          Registrar primeira medicao
         </ion-button>
-      </ion-card-content>
-    </ion-card>
+      </div>
+    </section>
   }
 
-  @for (medicao of medicoes; track medicao.id) {
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>
-          {{ medicao.registradaEm | date: 'dd/MM/yyyy HH:mm' }}
-        </ion-card-title>
-      </ion-card-header>
+  <section class="history-list">
+    @for (medicao of medicoes; track medicao.id) {
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            {{ medicao.registradaEm | date: 'dd/MM/yyyy HH:mm' }}
+          </ion-card-title>
+        </ion-card-header>
 
-      <ion-card-content>
-        <div class="measurement-grid">
-          <p>
-            <strong>Pressão</strong>
-            <span>{{ medicao.pressaoSistolica }}/{{ medicao.pressaoDiastolica }} mmHg</span>
-          </p>
+        <ion-card-content>
+          <div class="app-grid-two">
+            <div class="history-metric">
+              <strong>Pressao</strong>
+              <span>{{ medicao.pressaoSistolica }}/{{ medicao.pressaoDiastolica }} mmHg</span>
+            </div>
 
-          <p>
-            <strong>Frequência</strong>
-            <span>{{ medicao.frequenciaCardiaca }} bpm</span>
-          </p>
+            <div class="history-metric">
+              <strong>Frequencia</strong>
+              <span>{{ medicao.frequenciaCardiaca }} bpm</span>
+            </div>
 
-          <p>
-            <strong>Oxigenação</strong>
-            <span>{{ medicao.oxigenacaoSangue }}%</span>
-          </p>
+            <div class="history-metric">
+              <strong>Oxigenacao</strong>
+              <span>{{ medicao.oxigenacaoSangue }}%</span>
+            </div>
 
-          <p>
-            <strong>Peso</strong>
-            <span>{{ medicao.pesoCorporal }} kg</span>
-          </p>
-        </div>
-
-        <p class="symptoms">
-          <strong>Sintomas:</strong>
-          @if (medicao.possuiSintomas) {
-            Sim
-          } @else {
-            Não
-          }
-        </p>
-
-        @if (medicao.possuiSintomas) {
-          <div class="symptoms-details">
-            <strong>Qual sintoma?</strong>
-            <div class="symptom-tags">
-              @for (sintoma of obterSintomasMarcados(medicao.sintomas); track sintoma) {
-                <span>{{ sintoma }}</span>
-              }
+            <div class="history-metric">
+              <strong>Peso</strong>
+              <span>{{ medicao.pesoCorporal }} kg</span>
             </div>
           </div>
-        }
-      </ion-card-content>
-    </ion-card>
-  }
-</ion-content>
+
+          <div class="history-symptoms">
+            <strong>Sintomas</strong>
+            <span>{{ medicao.possuiSintomas ? 'Sim' : 'Nao' }}</span>
+          </div>
+
+          @if (medicao.possuiSintomas) {
+            <div class="history-tag-box">
+              <strong>Detalhes</strong>
+              <div class="app-tags">
+                @for (sintoma of obterSintomasMarcados(medicao.sintomas); track sintoma) {
+                  <span>{{ sintoma }}</span>
+                }
+              </div>
+            </div>
+          }
+        </ion-card-content>
+      </ion-card>
+    }
+  </section>
+</app-page-shell>

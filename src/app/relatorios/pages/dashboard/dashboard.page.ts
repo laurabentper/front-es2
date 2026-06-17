@@ -7,13 +7,13 @@ import {
   IonCardContent,
   IonCardHeader,
   IonCardTitle,
-  IonContent,
   IonText,
 } from '@ionic/angular/standalone';
 
 import { RelatorioService } from '../../services/relatorio.service';
 import { UsuarioService } from '../../../usuarios/services/usuario.service';
 import { ResumoMedicoesResposta } from '../../models/resumo-medicoes-resposta.model';
+import { PageShellComponent } from '../../../shared/components/page-shell/page-shell.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,13 +24,13 @@ import { ResumoMedicoesResposta } from '../../models/resumo-medicoes-resposta.mo
     DatePipe,
     DecimalPipe,
     RouterLink,
-    IonContent,
     IonCard,
     IonCardHeader,
     IonCardTitle,
     IonCardContent,
     IonButton,
     IonText,
+    PageShellComponent,
   ],
 })
 export class DashboardPage implements OnInit {
@@ -41,7 +41,7 @@ export class DashboardPage implements OnInit {
     private readonly relatorioService: RelatorioService,
     private readonly usuarioService: UsuarioService,
     private readonly router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.carregarResumo();
@@ -52,11 +52,10 @@ export class DashboardPage implements OnInit {
 
     this.relatorioService.obterResumo().subscribe({
       next: (resposta) => {
-        console.log('Resumo recebido:', resposta);
         this.resumo = resposta;
       },
       error: () => {
-        this.mensagemErro = 'Não foi possível carregar o resumo.';
+        this.mensagemErro = 'Nao foi possivel carregar o resumo.';
       },
     });
   }

@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import {
   IonButton,
   IonCheckbox,
-  IonContent,
   IonInput,
   IonItem,
   IonLabel,
@@ -13,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 
 import { MedicaoService } from '../../services/medicao.service';
 import { RegistrarMedicaoRequisicao } from '../../models/registrar-medicao-requisicao.model';
+import { PageShellComponent } from '../../../shared/components/page-shell/page-shell.component';
 
 @Component({
   selector: 'app-medicao-form',
@@ -21,14 +21,13 @@ import { RegistrarMedicaoRequisicao } from '../../models/registrar-medicao-requi
   standalone: true,
   imports: [
     FormsModule,
-    RouterLink,
-    IonContent,
     IonItem,
     IonLabel,
     IonInput,
     IonCheckbox,
     IonButton,
     IonText,
+    PageShellComponent,
   ],
 })
 export class MedicaoFormPage {
@@ -59,7 +58,7 @@ export class MedicaoFormPage {
         this.router.navigate(['/historico']);
       },
       error: () => {
-        this.mensagemErro = 'Não foi possível registrar a medição.';
+        this.mensagemErro = 'Nao foi possivel registrar a medicao.';
       },
     });
   }

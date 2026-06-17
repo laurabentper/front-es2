@@ -1,2 +1,58 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+
+:root {
+  --ion-font-family: "Aptos", "Segoe UI", "Trebuchet MS", sans-serif;
+
+  --ion-color-primary: #4da992;
+  --ion-color-primary-rgb: 77, 169, 146;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #448f7d;
+  --ion-color-primary-tint: #5faf9b;
+
+  --ion-color-secondary: #76c4b3;
+  --ion-color-secondary-rgb: 118, 196, 179;
+  --ion-color-secondary-contrast: #11362f;
+  --ion-color-secondary-contrast-rgb: 17, 54, 47;
+  --ion-color-secondary-shade: #68ac9d;
+  --ion-color-secondary-tint: #84cabd;
+
+  --ion-color-tertiary: #8ab6e8;
+  --ion-color-tertiary-rgb: 138, 182, 232;
+  --ion-color-tertiary-contrast: #0e2740;
+  --ion-color-tertiary-contrast-rgb: 14, 39, 64;
+  --ion-color-tertiary-shade: #799fcb;
+  --ion-color-tertiary-tint: #96bfeb;
+
+  --ion-color-success: #58bb8d;
+  --ion-color-success-rgb: 88, 187, 141;
+  --ion-color-warning: #f1c56e;
+  --ion-color-warning-rgb: 241, 197, 110;
+  --ion-color-danger: #eb7f8e;
+  --ion-color-danger-rgb: 235, 127, 142;
+
+  --ion-background-color: #eff8f5;
+  --ion-background-color-rgb: 239, 248, 245;
+  --ion-text-color: #21433e;
+  --ion-text-color-rgb: 33, 67, 62;
+  --ion-border-color: rgba(78, 129, 120, 0.14);
+
+  --ion-card-background: rgba(255, 255, 255, 0.82);
+  --ion-toolbar-background: rgba(244, 251, 248, 0.92);
+  --ion-item-background: rgba(255, 255, 255, 0.72);
+
+  --app-bg-top: #edf8f4;
+  --app-bg-bottom: #dff0f6;
+  --app-surface: rgba(255, 255, 255, 0.78);
+  --app-surface-strong: rgba(255, 255, 255, 0.92);
+  --app-primary: #4da992;
+  --app-primary-strong: #377a6e;
+  --app-accent: #93d4c7;
+  --app-highlight: #8ab6e8;
+  --app-text-strong: #1f4540;
+  --app-text-muted: #557a74;
+  --app-text-soft: #6f928d;
+  --app-border: rgba(70, 124, 114, 0.12);
+  --app-shadow: 0 20px 50px rgba(35, 94, 85, 0.12);
+}

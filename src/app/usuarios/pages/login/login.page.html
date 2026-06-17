@@ -1,35 +1,47 @@
-<ion-content class="ion-padding">
-  <h1>CardioTrack</h1>
-  <p>Acesse sua conta</p>
+<app-page-shell
+  title="Seu acompanhamento cardiaco, em um lugar so"
+  subtitle="Entre para visualizar suas medicoes, acompanhar tendencias e manter sua rotina de cuidado mais organizada."
+  eyebrow="Bem-vindo"
+  [centered]="true"
+>
+  <section class="app-form-card auth-card">
+    <h2>Acesse sua conta</h2>
+    <p>Use seu e-mail cadastrado para continuar.</p>
 
-  <ion-item>
-    <ion-label position="stacked">E-mail</ion-label>
-    <ion-input
-      type="email"
-      [(ngModel)]="email"
-      placeholder="Digite seu e-mail"
-    ></ion-input>
-  </ion-item>
+    <div class="app-form-grid auth-card__form">
+      <ion-item>
+        <ion-label position="stacked">E-mail</ion-label>
+        <ion-input
+          type="email"
+          [(ngModel)]="email"
+          placeholder="Digite seu e-mail"
+        ></ion-input>
+      </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Senha</ion-label>
-    <ion-input
-      type="password"
-      [(ngModel)]="senha"
-      placeholder="Digite sua senha"
-    ></ion-input>
-  </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Senha</ion-label>
+        <ion-input
+          type="password"
+          [(ngModel)]="senha"
+          placeholder="Digite sua senha"
+        ></ion-input>
+      </ion-item>
+    </div>
 
-  <ion-button expand="block" (click)="entrar()">
-    Entrar
-  </ion-button>
+    @if (mensagemErro) {
+      <ion-text class="app-message">
+        <p>{{ mensagemErro }}</p>
+      </ion-text>
+    }
 
-  <ion-button expand="block" fill="clear" routerLink="/cadastro">
-    Criar conta
-  </ion-button>
+    <div class="app-actions auth-card__actions">
+      <ion-button expand="block" (click)="entrar()">
+        Entrar
+      </ion-button>
 
-  @if (mensagemErro) {
-  <ion-text color="danger">
-    <p>{{ mensagemErro }}</p>
-  </ion-text>
-}
+      <ion-button expand="block" fill="outline" routerLink="/cadastro">
+        Criar conta
+      </ion-button>
+    </div>
+  </section>
+</app-page-shell>

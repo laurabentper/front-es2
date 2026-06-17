@@ -1,23 +1,43 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>CardioTrack</ion-title>
-
-    <ion-buttons slot="end">
-      <ion-button routerLink="/dashboard">
-        Dashboard
-      </ion-button>
-
-      <ion-button routerLink="/historico">
-        Histórico
-      </ion-button>
-
-      <ion-button routerLink="/medicao-form">
-        Nova Medição
-      </ion-button>
-
-      <ion-button routerLink="/integrantes">
-        Sobre
-      </ion-button>
-    </ion-buttons>
+  <ion-toolbar class="app-toolbar">
+    <div class="brand-mark">
+      <span class="brand-mark__eyebrow">Saude cardiovascular</span>
+      <strong>CardioTrack</strong>
+    </div>
   </ion-toolbar>
+
+  <div class="app-nav">
+    <ion-button
+      fill="clear"
+      routerLink="/dashboard"
+      routerLinkActive="is-active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Dashboard
+    </ion-button>
+
+    <ion-button
+      fill="clear"
+      routerLink="/historico"
+      routerLinkActive="is-active"
+    >
+      Historico
+    </ion-button>
+
+    <ion-button
+      fill="clear"
+      routerLink="/medicao-form"
+      routerLinkActive="is-active"
+    >
+      Nova medicao
+    </ion-button>
+
+    <ion-button
+      fill="clear"
+      routerLink="/integrantes"
+      routerLinkActive="is-active"
+    >
+      Sobre
+    </ion-button>
+  </div>
 </ion-header>

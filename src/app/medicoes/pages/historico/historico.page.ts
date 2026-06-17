@@ -6,7 +6,6 @@ import {
   IonCardContent,
   IonCardHeader,
   IonCardTitle,
-  IonContent,
   IonText,
 } from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
@@ -14,6 +13,7 @@ import { RouterLink } from '@angular/router';
 import { RelatorioService } from '../../../relatorios/services/relatorio.service';
 import { MedicaoResposta } from '../../models/medicao-resposta.model';
 import { SintomasResposta } from '../../models/sintomas-resposta.model';
+import { PageShellComponent } from '../../../shared/components/page-shell/page-shell.component';
 
 @Component({
   selector: 'app-historico',
@@ -23,13 +23,13 @@ import { SintomasResposta } from '../../models/sintomas-resposta.model';
   imports: [
     DatePipe,
     RouterLink,
-    IonContent,
     IonCard,
     IonCardHeader,
     IonCardTitle,
     IonCardContent,
     IonButton,
     IonText,
+    PageShellComponent,
   ],
 })
 export class HistoricoPage implements OnInit {
@@ -55,7 +55,7 @@ export class HistoricoPage implements OnInit {
         this.medicoes = resposta.medicoes ?? [];
       },
       error: () => {
-        this.mensagemErro = 'Não foi possível carregar o histórico.';
+        this.mensagemErro = 'Nao foi possivel carregar o historico.';
       },
     });
   }

@@ -1,0 +1,19 @@
+.about-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.about-list {
+  display: grid;
+  gap: 10px;
+}
+
+.about-list p {
+  margin: 0;
+}
+
+@media (min-width: 720px) {
+  .about-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
