@@ -30,7 +30,18 @@ export class UsuarioService {
   }
 
   obterToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+    const token = localStorage.getItem(this.tokenKey);
+
+    if (!token) {
+      return null;
+    }
+
+    if (this.tokenExpirou(token)) {
+      this.logout();
+      return null;
+    }
+
+    return token;
   }
 
   logout(): void {
@@ -38,6 +49,38 @@ export class UsuarioService {
   }
 
   estaAutenticado(): boolean {
-    return !!this.obterToken();
+    return this.obterToken() !== null;
+  }
+
+  private tokenExpirou(token: string): boolean {
+    const exp = this.obterExpiracaoToken(token);
+
+    if (!exp) {
+      return true;
+    }
+
+    return Date.now() >= exp.getTime();
+  }
+
+  private obterExpiracaoToken(token: string): Date | null {
+    try {
+      const partes = token.split('.');
+
+      if (partes.length !== 3) {
+        return null;
+      }
+
+      const cargaUtil = JSON.parse(atob(partes[1].replace(/-/g, '+').replace(/_/g, '/'))) as {
+        exp?: number;
+      };
+
+      if (!cargaUtil.exp) {
+        return null;
+      }
+
+      return new Date(cargaUtil.exp * 1000);
+    } catch {
+      return null;
+    }
   }
 }

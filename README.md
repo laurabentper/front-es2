@@ -1,184 +1,240 @@
 # CardioTrack Frontend
 
-Frontend do sistema **CardioTrack**, desenvolvido com **Ionic + Angular**, para acompanhamento de saúde cardíaca. O aplicativo permite autenticação de usuários, cadastro de medições, visualização de histórico e consulta de resumo com indicadores consolidados.
+Aplicacao cliente do **CardioTrack**, desenvolvida com **Ionic + Angular**.
+Permite que o usuario se cadastre, faca login, registre medicoes, consulte o
+historico e visualize um resumo agregado dos dados retornados pela API.
 
-## Tecnologias usadas
 
-- Angular 20
-- Ionic 8
-- TypeScript
-- RxJS
-- Angular Router
-- Angular HttpClient
-- Capacitor
-- Karma/Jasmine para testes
+## Sumario
 
-## Pré-requisitos
+- [Tecnologias](#tecnologias)
+- [Arquitetura](#arquitetura)
+- [Estrutura de pastas](#estrutura-de-pastas)
+- [Como executar](#como-executar)
+- [Configuracao](#configuracao)
+- [Rotas](#rotas)
+- [Integracao com a API](#integracao-com-a-api)
+- [Autenticacao](#autenticacao)
+- [Testes](#testes)
 
-Antes de executar o projeto, tenha instalado:
+## Tecnologias
 
-- Node.js 20 ou superior
-- npm 10 ou superior
-- Angular CLI 20
-- Ionic CLI
+- **Angular 20** com componentes standalone
+- **Ionic 8** para componentes de interface
+- **Angular Router** para navegacao
+- **Angular HttpClient** para consumo da API
+- **TypeScript 5**
+- **RxJS 7**
+- **Karma + Jasmine** para testes unitarios
+- **ESLint** para analise estatica
 
-Instalação opcional das CLIs globais:
+## Arquitetura
 
-```bash
-npm install -g @angular/cli @ionic/cli
+O projeto segue uma organizacao modular por dominio, agrupando cada
+funcionalidade principal em sua propria pasta. Em vez de concentrar tudo por
+tipo tecnico, o front distribui **pages**, **services** e **models** por
+contexto de negocio, o que facilita localizar telas, contratos e chamadas HTTP
+relacionadas a uma mesma funcionalidade.
+
+### Modularizacao
+
+A modularizacao acontece em **dois eixos complementares**:
+
+1. **Infraestrutura compartilhada.** O bootstrap da aplicacao, o roteamento, o
+   interceptor HTTP e o guarda de autenticacao vivem em areas centrais
+   reutilizadas por todo o app.
+
+2. **Vertical por funcionalidade.** O codigo de **Usuarios**, **Medicoes** e
+   **Relatorios** fica separado em pastas proprias, cada uma com suas paginas,
+   servicos e modelos:
+
+   ```
+   src/app/
+   ├── core/              # authGuard, authInterceptor
+   ├── shared/            # componentes reutilizaveis
+   ├── usuarios/          # pages / services / models
+   ├── medicoes/          # pages / services / models
+   ├── relatorios/        # pages / services / models
+   └── sobre/             # paginas institucionais
+   ```
+
+### Padroes e decisoes de design
+
+- **Bootstrap standalone.** A aplicacao e iniciada com
+  `bootstrapApplication(...)`, sem `NgModule` raiz.
+- **Rotas com lazy loading.** As paginas sao carregadas com `loadComponent(...)`
+  sob demanda.
+- **Protecao por guarda de rota.** As rotas autenticadas usam `authGuard` para
+  redirecionar usuarios nao autenticados para `/login`.
+- **Interceptor de autenticacao.** O `authInterceptor` injeta o cabecalho
+  `Authorization: Bearer <token>` nas requisicoes quando existe um token valido.
+- **Sessao com expiracao local.** O token salvo no `localStorage` e validado pelo
+  proprio front; se estiver expirado, a sessao e removida.
+- **Tratamento central de `401`.** Quando a API responde `401 Unauthorized`, o
+  front faz logout e navega de volta para o login.
+
+## Estrutura de pastas
+
+```
+front-es2/
+├── android/                     # projeto Android gerado pelo Capacitor
+├── src/
+│   ├── app/
+│   │   ├── core/
+│   │   │   ├── guards/         # authGuard
+│   │   │   └── interceptors/   # authInterceptor
+│   │   ├── shared/             # componentes compartilhados
+│   │   ├── usuarios/           # login, cadastro, servico de autenticacao
+│   │   ├── medicoes/           # formulario e historico de medicoes
+│   │   ├── relatorios/         # dashboard e consumo de relatorios
+│   │   └── sobre/              # paginas institucionais
+│   ├── assets/                 # arquivos estaticos
+│   ├── environments/           # configuracoes por ambiente
+│   ├── theme/                  # variaveis globais do Ionic
+│   └── main.ts                 # bootstrap da aplicacao
+├── www/                        # saida do build Angular
+├── angular.json                # configuracao de build e serve
+├── capacitor.config.ts         # configuracao do app nativo
+├── package.json                # scripts e dependencias
+└── karma.conf.js               # configuracao de testes
 ```
 
-## Instalação das dependências
+## Como executar
 
-No diretório do projeto, execute:
+### Pre-requisitos
+
+- [Node.js](https://nodejs.org/)
+- `npm`
+
+### 1. Instalar dependencias
 
 ```bash
 npm install
 ```
 
-## Como rodar o frontend
-
-Para iniciar o frontend em ambiente de desenvolvimento:
+### 2. Rodar o servidor de desenvolvimento
 
 ```bash
 npm start
 ```
 
-ou
+O script `start` executa `ng serve`. O target `serve` do Angular usa a
+configuracao `development` por padrao.
 
-```bash
-ng serve
-```
-
-Depois disso, acesse no navegador:
-
-```text
-http://localhost:4200
-```
-
-## Como rodar junto com o backend local
-
-O frontend está configurado, em desenvolvimento, para consumir a API em:
-
-```text
-http://localhost:5189/api
-```
-
-Passos recomendados:
-
-1. Inicie primeiro o backend local na porta `5189`.
-2. Confirme que os endpoints da API estão disponíveis.
-3. Em outro terminal, inicie o frontend com `npm start`.
-4. Acesse `http://localhost:4200`.
-
-Se o backend estiver rodando em outra porta ou outro host, atualize a propriedade `apiUrl` nos arquivos de ambiente.
-
-## URL da API configurada
-
-As URLs atualmente configuradas são:
-
-- Desenvolvimento: [src/environments/environment.ts](C:/Users/llben/Desktop/ES2/front-es2/src/environments/environment.ts)
-  - `http://localhost:5189/api`
-- Produção: [src/environments/environment.prod.ts](C:/Users/llben/Desktop/ES2/front-es2/src/environments/environment.prod.ts)
-  - `http://192.168.1.15:5189/api`
-
-Observação importante:
-
-- No APK, não deve ser usado `localhost`, porque o celular não acessa a máquina de desenvolvimento por esse endereço.
-- Para testes em dispositivo Android na mesma rede local, configure `environment.prod.ts` com o **IP da máquina na rede local**, por exemplo `http://192.168.x.x:5189/api`.
-
-## Build de produção
-
-Para gerar o build de produção:
+### 3. Gerar o build de producao
 
 ```bash
 npm run build
 ```
 
-O Angular substituirá `environment.ts` por `environment.prod.ts` durante o processo de build.
-
-## Estrutura de pastas
-
-A organização principal do projeto está em `src/app`:
-
-- `pages`
-  - Telas da aplicação, organizadas por funcionalidade.
-  - Exemplos: login, cadastro, dashboard, histórico, formulário de medição, integrantes.
-- `services`
-  - Responsáveis pelas chamadas HTTP e regras de acesso aos dados da API.
-  - Exemplos: autenticação de usuário, cadastro de medição, consulta de relatórios.
-- `models`
-  - Interfaces e tipos usados para representar requisições e respostas da API.
-- `core`
-  - Infraestrutura compartilhada da aplicação.
-  - Contém itens como `guards` de rota e `interceptors` HTTP.
-- `shared`
-  - Componentes reutilizáveis entre telas.
-  - Exemplo: cabeçalho compartilhado da aplicação.
-
-Organização atual por domínio:
-
-- `src/app/usuarios`
-  - `pages`, `services`, `models`
-- `src/app/medicoes`
-  - `pages`, `services`, `models`
-- `src/app/relatorios`
-  - `pages`, `services`, `models`
-- `src/app/sobre`
-  - páginas institucionais, como a tela de integrantes
-- `src/app/core`
-  - `guards` e `interceptors`
-- `src/app/shared`
-  - componentes compartilhados
-
-## Funcionalidades implementadas
-
-- Login de usuário
-- Cadastro de usuário
-- Proteção de rotas autenticadas com `authGuard`
-- Armazenamento local do token de autenticação
-- Interceptor HTTP para envio automático do header `Authorization`
-- Dashboard com resumo das medições
-- Visualização de estatísticas gerais de saúde cardíaca
-- Registro de nova medição
-- Histórico de medições registradas
-- Exibição de sintomas informados nas medições
-- Tela de integrantes do projeto
-- Navegação entre telas com Angular Router
-
-## Fluxo geral de uso
-
-1. O usuário acessa a tela de login.
-2. Pode se cadastrar caso ainda não tenha conta.
-3. Após autenticação, acessa o dashboard.
-4. No dashboard, pode:
-   - registrar uma nova medição
-   - consultar o histórico
-   - acessar a tela de integrantes
-   - sair da aplicação
-
-## Scripts úteis
-
-- `npm start`
-  - inicia o servidor de desenvolvimento
-- `npm run build`
-  - gera o build de produção
-- `npm test`
-  - executa os testes
-- `npm run lint`
-  - executa a análise estática com ESLint
-
-## Observação para apresentação e APK
-
-Como o trabalho exige demonstração em celular Android e integração com o backend, o APK deve apontar para a API usando o IP da máquina host na rede local. Exemplo:
+O build gera os arquivos estaticos em:
 
 ```text
-http://192.168.1.15:5189/api
+www/
 ```
 
-Antes de gerar o APK, confirme:
+Durante `ng build`, o Angular troca `environment.ts` por
+`environment.prod.ts` via `fileReplacements`.
 
-- se o backend está acessível pela rede local
-- se a porta `5189` está liberada
-- se o celular e a máquina estão na mesma rede
-- se `environment.prod.ts` foi atualizado com o IP correto
+## Configuracao
+
+As configuracoes por ambiente ficam em `src/environments/`.
+
+| Arquivo | Descricao | Valor atual |
+|--------|-----------|-------------|
+| `environment.ts` | Ambiente de desenvolvimento | `https://localhost:5189/api` |
+| `environment.prod.ts` | Ambiente de producao/build | `http://SEU_IP_LOCAL:5189/api` |
+
+> **Atencao:** o arquivo `environment.prod.ts` contem um placeholder (`SEU_IP_LOCAL`)
+> e precisa ser ajustado manualmente antes de gerar um build que dependa desse
+> host.
+
+## Rotas
+
+As rotas definidas em `src/app/app.routes.ts` sao:
+
+| Rota | Protegida | Descricao |
+|------|:---:|-----------|
+| `/login` | nao | Tela de autenticacao. |
+| `/cadastro` | nao | Tela de criacao de conta. |
+| `/integrantes` | nao | Tela institucional com integrantes. |
+| `/dashboard` | sim | Resumo das medicoes do usuario autenticado. |
+| `/historico` | sim | Lista/historico de medicoes. |
+| `/medicao-form` | sim | Formulario de registro de medicao. |
+
+A raiz `/` redireciona para `/login`.
+
+## Integracao com a API
+
+O front consome a API a partir de `environment.apiUrl` e distribui as chamadas
+entre tres servicos principais:
+
+| Servico | Base URL | Chamadas implementadas |
+|--------|----------|------------------------|
+| `UsuarioService` | `/usuarios` | `POST /usuarios`, `POST /usuarios/login` |
+| `MedicaoService` | `/medicoes` | `POST /medicoes` |
+| `RelatorioService` | `/relatorios` | `GET /relatorios/historico`, `GET /relatorios/resumo` |
+
+### Fluxo por tela
+
+#### Cadastro
+
+- Tela: `usuarios/pages/cadastro`
+- Chamada: `POST /api/usuarios`
+- Comportamento: em sucesso, navega para `/login`
+
+#### Login
+
+- Tela: `usuarios/pages/login`
+- Chamada: `POST /api/usuarios/login`
+- Comportamento: salva o token e navega para `/dashboard`
+
+#### Registro de medicao
+
+- Tela: `medicoes/pages/medicao-form`
+- Chamada: `POST /api/medicoes`
+- Comportamento: em sucesso, navega para `/historico`
+
+#### Historico
+
+- Tela: `medicoes/pages/historico`
+- Chamada: `GET /api/relatorios/historico`
+- Comportamento: carrega a lista de medicoes e exibe os sintomas marcados
+
+#### Dashboard
+
+- Tela: `relatorios/pages/dashboard`
+- Chamada: `GET /api/relatorios/resumo`
+- Comportamento: carrega o resumo agregado e oferece acao de logout
+
+## Autenticacao
+
+1. O usuario faz login em `POST /api/usuarios/login`.
+2. O token retornado e salvo no `localStorage` com a chave
+   `cardiotrack_token`.
+3. Antes de usar o token, o front decodifica o payload JWT e verifica a claim
+   `exp`.
+4. Se o token estiver expirado (ou for invalido), ele e removido.
+5. As rotas protegidas dependem de `UsuarioService.estaAutenticado()`.
+6. O interceptor injeta o token nas chamadas protegidas.
+7. Qualquer `401 Unauthorized` recebido da API encerra a sessao e redireciona
+   o usuario para `/login`.
+
+## Testes
+
+```bash
+# Testes unitarios
+npm test
+
+# Lint
+npm run lint
+```
+
+Os arquivos de teste presentes no projeto cobrem componentes, paginas e o
+servico de usuario. Entre eles:
+
+- `src/app/app.component.spec.ts`
+- `src/app/shared/components/app-header/app-header.component.spec.ts`
+- `src/app/usuarios/pages/login/login.page.spec.ts`
+- `src/app/usuarios/pages/cadastro/cadastro.page.spec.ts`
+- `src/app/usuarios/services/usuario.service.spec.ts`
